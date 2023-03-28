@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Image based tracking AR.js demo</title>
+  <!-- import aframe and then ar.js with image tracking / location based features -->
+  <!-- <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1c2407b26c61958baa93967b5412487cd94b290b/dist/aframe-master.min.js"></script> -->
+  <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+
+  <!-- Other external scripts and meta tags can also be added. -->
+  <!-- Audio -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>  -->
+  <!-- tooltip -->
+  <!-- <script src="https://unpkg.com/aframe-slice9-component/dist/aframe-slice9-component.min.js"></script>  -->
+
+  <!-- <script type='text/javascript' src='./aframe-gif-shader.js'></script>
+  <script type='text/javascript' src='./app.js'></script> -->
+  
+  <!-- style for the loader -->
+  <!-- <link rel="stylesheet" href='./subtitle.css'></script> -->
+</head>
+
+<body>
+  <!-- minimal loader shown until image descriptors are loaded. Loading may take a while according to the device computational power -->
+  <div class="arjs-loader">
+    <div>Loading, please wait...01</div>
+  </div>
+
+  <!-- The guide image should have a dim panel and should be deactivated when the image target is found -->
+  <!-- <div id="guidePanel" class="covering-panel">
+        <h2 style="color:white;  text-shadow:
+      -1px -1px 0 #000,
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+      1px 1px 0 #000;">KB스타프렌즈를 찾아주세요</h2>
+        <h3></h3>
+        <img width="64%" height="auto" src="./images/Prewrite_00.png" style="opacity : 0.7; pointer-events: none">
+    </div> -->
+
+  <!-- <div class='experience'>
+      <div>서비스 체험중입니다</div>
+  </div> -->
+
+  <!-- <div id='subtitleBtn' class='subtitle'>
+      <div id="sub">미리 작성 서비스 - 입금 편</div>
+  </div> -->
+
+  <!-- a-frame scene -->
+  <a-scene 
+    tester-01 
+    vr-mode-ui="enabled: false;" 
+    renderer="logarithmicDepthBuffer: true;" 
+    embedded
+    arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: true; "
+  >
+
+  <a-assets>
+    <!-- <img id="clickGif" src="./images/click-hand-3d.gif">
+    <img id="tooltipImg" src="./images/tooltip_ol35.png"> -->
+    <a-asset-item id="supporter_model" src="./models/ar_taewon.glb"></a-asset-item>
+    <a-asset-item id="trex" src="./trex/scene.gltf"></a-asset-item>
+    <img id="Prewrite_00" src="./images/Prewrite_00.png">
+    <!-- <img id="Prewrite_01" src="./images/Prewrite_01.png">
+    <img id="Prewrite_02" src="./images/Prewrite_02.png">
+    <img id="Prewrite_03" src="./images/Prewrite_03.png">
+    <img id="Prewrite_04" src="./images/Prewrite_04.png">
+    <img id="Prewrite_05" src="./images/Prewrite_05.png">
+    <img id="Prewrite_06" src="./images/Prewrite_06.png"> -->
+  </a-assets>
+    <!-- a-nft is the anchor that defines an Image Tracking entity -->
+    <!-- on 'url' use the path to the Image Descriptors created before. -->
+    <!-- the path should end with the name without the extension e.g. if file is trex.fset' the path should end with trex -->
+    <!-- <a-nft tester-02 type="nft" url='./trex/trex-image/trex'  smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5"> -->
+    <a-nft tester-02 type="nft" url='./markers/kb' smooth="true" smoothCount="10" smoothTolerance=".01" smoothThreshold="5">
+      <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
+      <!-- <a-entity gltf-model="#trex" scale="5 5 5" position="100 0 0"></a-entity> -->
+      
+
+      
+      <a-entity position="190 0 -300">
+        <!-- <a-box id="greenLeft" scale="60 60 60" position="-100 0 0" color="#00ff00"></a-box> 
+        <a-box id="redZDown"   scale="60 60 60" position="0 -100 " color="#ff0000"></a-box> 
+        <a-box id="skyUp"   scale="60 60 60" position="0 0 -100" color="#4CC3D9"></a-box>
+        <a-box id="blueCenter"  scale="60 60 60" position="0 0 0" color="#0000ff"></a-box> -->
+
+        <a-box id="green" scale="60 60 60" position="0 0 0" color="#00ff00"></a-box>
+
+        <a-entity gltf-model="#supporter_model" position="-100 0 100" scale="100 100 100" rotation="-90 0 0"></a-entity>
+        <a-image id='prewriteImg' src="#Prewrite_00" height="1.8" position="100 0 0" rotation="-90 0 0" scale="100 100 100"></a-image>
+      </a-entity>
+
+      <!-- <a-entity position="-100 0 0">
+        <a-box id="green" scale="60 60 60" position="-100 0 0" color="#00ff00"></a-box>
+        <a-box id="red"   scale="60 60 60" position="0 -100 " color="#ff0000"></a-box>
+        <a-box id="sky"   scale="60 60 60" position="0 0 -100" color="#4CC3D9"></a-box>
+        <a-box id="blue"  scale="60 60 60" position="0 0 0" color="#0000ff"></a-box>
+
+        <a-entity gltf-model="#supporter_model" position="0 0 0" scale="200 200 200"></a-entity>
+        <a-image id='prewriteImg' src="#Prewrite_00" height="1.8" position="0 0 0" rotation="-90 0 0" scale="100 100 100"></a-image>
+      </a-entity> -->
+      
+      <!-- <a-entity scale="100 100 100" position="200 200 0" rotation="-90 0   0">
+    
+        <a-image id='prewriteImg' src="#Prewrite_00" height="1.8" position="0 0 0" scale="0.53 0.53 0.53"></a-image>
+        <a-entity gltf-model="#supporter_model" position="0 0 0" scale="2 2 2"></a-entity>
+
+        <a-text id="caption" value="서비스 체험중" color="red" shader="msdf" scale=" 0.15 0.15 0.15"
+            position="-0.095 0.45 0.001"
+            font="https://raw.githubusercontent.com/myso-kr/aframe-fonts-korean/master/fonts/ofl/nanumgothic/NanumGothic-Regular.json">
+        </a-text>
+        <a-entity id='tooltipBox' class="cantap" scale="0.5 0.5 0.5" position="-0.105 0.018 0.002"
+            slice9="color:red; width: 0.35; height: 0.4; left: 20; right: 43; top: 20; bottom: 43; src: #tooltipImg"></a-entity>
+        <a-entity id='clickCursor' position="0.25 -0.445 0.004"
+            geometry="primitive:plane;width:0.16;height:0.16;"
+            material="shader:gif; src:#clickGif; alphaTest:0.5"></a-entity>
+        <a-entity id='replayBox' scale="0.5 0.5 0.5" position="0 -0.4 0.002"
+            slice9="color:blue;  width: 0.95; height: 0.28; left: 20; right: 43; top: 20; bottom: 43; src: #tooltipImg"></a-entity>
+
+    </a-entity> -->
+
+    </a-nft>
+
+    <!-- static camera that moves according to the device movemenents -->
+    <a-entity camera></a-entity>
+  </a-scene>
+</body>
+
+</html>
